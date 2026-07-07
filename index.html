@@ -113,6 +113,74 @@ footer{
     color:#888;
     margin-top:450px;
 }
+
+.photo img{
+    width:170px;
+    height:170px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid #1286a5;
+
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+.photo img:hover{
+    transform:scale(1.1);
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+/* ---------- Modal ---------- */
+
+.modal{
+    display:none;
+    position:fixed;
+    z-index:999;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.9);
+
+    justify-content:center;
+    align-items:center;
+}
+
+.modal-content{
+
+    max-width:80%;
+    max-height:90%;
+
+    border-radius:10px;
+
+    animation:zoom .3s;
+}
+
+@keyframes zoom{
+
+    from{
+        transform:scale(.5);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
+
+.close{
+
+    position:absolute;
+    top:25px;
+    right:40px;
+
+    color:white;
+    font-size:45px;
+    cursor:pointer;
+}
+
 </style>
 
 </head>
@@ -126,7 +194,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     <div class="left">
 
         <div class="photo">
-            <img src="unnamed.jpg" alt="Profile">
+            <img src="unnamed.jpg" alt="Profile" id="profileImg">
+            <div id="imageModal" class="modal">
+                <span class="close">&times;</span>
+                <img class="modal-content" id="fullImage">
+            </div>
         </div>
 
         <div class="name">
@@ -214,6 +286,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
             <h3>Name</h3>
             <p>Pattharabun Daengjanthee</p>
 
+            <h3>ID</h3>
+            <p>674110310077</p>
+
             <h4>Nickname</h4>
             <p>Jack</p>
 
@@ -252,6 +327,35 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     </div>
 
 </div>
+
+<script>
+
+const img = document.getElementById("profileImg");
+const modal = document.getElementById("imageModal");
+const fullImage = document.getElementById("fullImage");
+
+img.onclick = function(){
+
+    modal.style.display = "flex";
+    fullImage.src = this.src;
+
+}
+
+modal.onclick = function(){
+
+    modal.style.display = "none";
+
+}
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+        modal.style.display="none";
+    }
+
+});
+
+</script>
 
 </body>
 </html>
